@@ -1,12 +1,11 @@
-import { Component, Input, OnInit } from '@angular/core';
+import { Component, Input, OnInit } from "@angular/core";
 
 @Component({
-  selector: 'app-todo',
-  templateUrl: './todo.component.html',
-  styleUrls: ['./todo.component.scss']
+  selector: "app-todo",
+  templateUrl: "./todo.component.html",
+  styleUrls: ["./todo.component.scss"],
 })
 export class TodoComponent implements OnInit {
-
   @Input()
   todoTitle?: string;
   @Input()
@@ -17,9 +16,12 @@ export class TodoComponent implements OnInit {
   todoCreatedOn?: string;
   @Input()
   todoUID?: string;
-  
-  constructor() { }
+  @Input()
+  removeTodo!: (uid: string) => void;
+  @Input()
+  changeStatus!: (uid: string) => void;
 
-  ngOnInit(): void {
-  }
+  constructor() {}
+
+  ngOnInit(): void {}
 }

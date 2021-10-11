@@ -1,17 +1,31 @@
-<div>
-  <p>
+<div class="todo">
+  <h3 class="flex todo-header" contenteditable="true">
     {{ todoTitle }}
-  </p>
-  <p>
+  </h3>
+  <div class="todo-body" contenteditable="true">
     {{ todoBody }}
-  </p>
-  <p>
-    {{ todoStatus }}
-  </p>
-  <p>
-    {{ todoCreatedOn }}
-  </p>
-  <p>
-    {{ todoUID }}
-  </p>
+  </div>
+  <div class="todo-info">
+    <button
+      class="todo-status bg-inProgress"
+      (click)="changeStatus(todoTitle!)"
+      *ngIf="todoStatus == 'In Progress'; else completed"
+    >
+      {{ todoStatus }}
+    </button>
+    <ng-template #completed>
+      <button
+        class="todo-status bg-completed"
+        (click)="changeStatus(todoTitle!)"
+      >
+        {{ todoStatus }}
+      </button>
+    </ng-template>
+    <small>
+      {{ todoCreatedOn }}
+    </small>
+  </div>
+  <div class="todo-action">
+    <button class="" (click)="removeTodo(todoTitle!)">Remove</button>
+  </div>
 </div>

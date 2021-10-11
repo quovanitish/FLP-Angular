@@ -1,0 +1,51 @@
+@import "../../../styles/variables";
+
+.todo {
+  display: flex;
+  justify-content: space-between;
+  flex-direction: column;
+  background-color: white;
+  min-width: 20rem;
+  min-height: 10rem;
+  box-shadow: rgba(99, 99, 99, 0.2) 0px 2px 8px 0px;
+  padding: 1rem 1.5rem;
+}
+
+.todo-header {
+  margin-bottom: 1rem;
+  outline: none;
+}
+
+.todo-body {
+  word-break: break-all;
+  margin-bottom: 2rem;
+  outline: none;
+}
+
+.todo-info {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 0.8rem 0;
+}
+
+.todo-status {
+  min-width: 4rem;
+  color: black;
+  padding: 0.2rem 0.4rem;
+  border: 0.16em solid rgba(255, 255, 255, 0);
+  border-radius: 1em;
+  font-weight: 300;
+  color: white;
+  cursor: pointer;
+}
+
+.todo-action button {
+  width: 100%;
+  padding: 5px 10px;
+  color: white;
+  cursor: pointer;
+  background-color: #e86b71;
+  border: none;
+  border-radius: 0.2rem;
+}

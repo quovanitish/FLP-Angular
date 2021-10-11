@@ -1,9 +1,11 @@
-<div class="flex" *ngFor="let todo of todosList">
+<div class="todos flex" *ngFor="let todo of todosList">
   <app-todo
     [todoTitle]="todo.title"
     [todoBody]="todo.body"
     [todoStatus]="todo.status"
-    [todoStatus]="todo.createdOn"
+    [todoCreatedOn]="todo.createdOn"
     [todoUID]="todo.uid"
+    [removeTodo]="removeTodo"
+    [changeStatus]="changeStatus"
   ></app-todo>
 </div>

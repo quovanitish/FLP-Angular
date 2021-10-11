@@ -4,14 +4,14 @@ export let todos: Todo[] = [
   {
     title: "Learn Angular",
     body: "Angular is great for frontend development",
-    status: "In progress",
+    status: "In Progress",
     createdOn: new Date().toDateString(),
     uid: "jasdjas",
   },
   {
     title: "Learn React",
     body: "React is great for frontend development",
-    status: "In progress",
+    status: "Completed",
     createdOn: new Date().toDateString(),
     uid: "jasdjas",
   },
