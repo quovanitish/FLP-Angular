@@ -19,7 +19,7 @@ export class TodoComponent implements OnInit {
   @Input()
   removeTodo!: (uid: string) => void;
   @Input()
-  changeStatus!: (uid: string) => void;
+  toggleStatus!: (uid: string) => void;
 
   constructor() {}
 

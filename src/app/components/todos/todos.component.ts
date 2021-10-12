@@ -17,10 +17,14 @@ export class TodosComponent implements OnInit {
     );
   };
 
-  //Function to change status of todo
-  // Todo: Implement the logic to change status of Todo
-  changeStatus = (todoTitle: string): void => {
-    // Implement here...
+  //Function to toggle status of todo
+  toggleStatus = (todoTitle: string): void => {
+    this.todosList?.map((todoObj) => {
+      if (todoObj.title == todoTitle) {
+        todoObj.status =
+          todoObj.status == "In Progress" ? "Completed" : "In Progress";
+      }
+    });
   };
 
   constructor() {}

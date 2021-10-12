@@ -8,7 +8,7 @@
   <div class="todo-info">
     <button
       class="todo-status bg-inProgress"
-      (click)="changeStatus(todoTitle!)"
+      (click)="toggleStatus(todoTitle!)"
       *ngIf="todoStatus == 'In Progress'; else completed"
     >
       {{ todoStatus }}
@@ -16,7 +16,7 @@
     <ng-template #completed>
       <button
         class="todo-status bg-completed"
-        (click)="changeStatus(todoTitle!)"
+        (click)="toggleStatus(todoTitle!)"
       >
         {{ todoStatus }}
       </button>

@@ -5,3 +5,30 @@
   background-color: $primary-green;
   padding: 2rem;
 }
+
+.add-todo {
+  padding-top: 1rem;
+  padding-left: 2rem;
+  padding-right: 2rem;
+}
+
+.add-todo-action {
+  width: 100%;
+  background-color: $secondary-green;
+  outline: none;
+  border: none;
+  font-size: 1.5rem;
+  color: $tertiary-green;
+  border-radius: 0.5rem;
+  cursor: pointer;
+  padding: 0.2rem;
+}
+
+.todo-container {
+  margin-top: 4rem;
+  width: 25rem;
+}
+
+.bg-primary {
+  background-color: $primary-green;
+}

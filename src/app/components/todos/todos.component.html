@@ -1,11 +1,16 @@
-<div class="todos flex" *ngFor="let todo of todosList">
-  <app-todo
-    [todoTitle]="todo.title"
-    [todoBody]="todo.body"
-    [todoStatus]="todo.status"
-    [todoCreatedOn]="todo.createdOn"
-    [todoUID]="todo.uid"
-    [removeTodo]="removeTodo"
-    [changeStatus]="changeStatus"
-  ></app-todo>
+<div class="todo-container bg-primary">
+  <div class="add-todo">
+    <button class="add-todo-action">+</button>
+  </div>
+  <div class="todos flex" *ngFor="let todo of todosList">
+    <app-todo
+      [todoTitle]="todo.title"
+      [todoBody]="todo.body"
+      [todoStatus]="todo.status"
+      [todoCreatedOn]="todo.createdOn"
+      [todoUID]="todo.uid"
+      [removeTodo]="removeTodo"
+      [toggleStatus]="toggleStatus"
+    ></app-todo>
+  </div>
 </div>

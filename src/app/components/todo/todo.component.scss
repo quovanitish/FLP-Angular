@@ -5,7 +5,7 @@
   justify-content: space-between;
   flex-direction: column;
   background-color: white;
-  min-width: 20rem;
+  width: 22rem;
   min-height: 10rem;
   box-shadow: rgba(99, 99, 99, 0.2) 0px 2px 8px 0px;
   padding: 1rem 1.5rem;
@@ -19,6 +19,7 @@
 .todo-body {
   word-break: break-all;
   margin-bottom: 2rem;
+  min-height: 4rem;
   outline: none;
 }
 
@@ -30,7 +31,7 @@
 }
 
 .todo-status {
-  min-width: 4rem;
+  min-width: 6rem;
   color: black;
   padding: 0.2rem 0.4rem;
   border: 0.16em solid rgba(255, 255, 255, 0);
