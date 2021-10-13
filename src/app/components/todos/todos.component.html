@@ -9,13 +9,9 @@
   </div>
   <div class="todos flex" *ngFor="let todo of todosList">
     <app-todo
-      [todoTitle]="todo.title"
-      [todoBody]="todo.body"
-      [todoStatus]="todo.status"
-      [todoCreatedOn]="todo.createdOn"
-      [todoUID]="todo.uid"
-      [removeTodo]="removeTodo"
-      [toggleStatus]="toggleStatus"
+      [todoObj]="todo"
+      (toggleStatus)="handleToggleStatus($event)"
+      (deleteTodo)="handleDeleteTodo($event)"
     ></app-todo>
   </div>
 </div>
