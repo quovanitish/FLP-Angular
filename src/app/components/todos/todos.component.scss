@@ -10,6 +10,10 @@
   padding-top: 1rem;
   padding-left: 2rem;
   padding-right: 2rem;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
 }
 
 .add-todo-action {
@@ -22,6 +26,18 @@
   border-radius: 0.5rem;
   cursor: pointer;
   padding: 0.2rem;
+  box-shadow: rgba(0, 0, 0, 0.02) 0px 1px 3px 0px, rgba(27, 31, 35, 0.15) 0px 0px 0px 1px;
+}
+
+.add-todo-input {
+  background-color: white;
+  border: none;
+  outline: none;
+  width: 100%;
+  margin-top: 1rem;
+  padding: 0.5rem 1rem;
+  font-size: 1rem;
+  box-shadow: rgba(99, 99, 99, 0.2) 0px 2px 8px 0px;
 }
 
 .todo-container {

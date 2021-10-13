@@ -9,6 +9,7 @@ import { todos } from "../../../db/todos";
 })
 export class TodosComponent implements OnInit {
   todosList?: Todo[];
+  inputValue?: String;
 
   // Function to remove a todo from the todo list
   removeTodo = (todoTitle: string): void => {
@@ -25,6 +26,12 @@ export class TodosComponent implements OnInit {
           todoObj.status == "In Progress" ? "Completed" : "In Progress";
       }
     });
+  };
+
+  // get value from input
+  getValue = (e: Event) => {
+    this.inputValue = (e.target as HTMLSpanElement).textContent!;
+    console.log(this.inputValue);
   };
 
   constructor() {}

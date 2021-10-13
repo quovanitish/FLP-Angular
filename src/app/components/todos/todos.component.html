@@ -1,6 +1,11 @@
 <div class="todo-container bg-primary">
   <div class="add-todo">
     <button class="add-todo-action">+</button>
+    <span
+      class="add-todo-input"
+      contenteditable="true"
+      (keyup)="getValue($event)"
+    ></span>
   </div>
   <div class="todos flex" *ngFor="let todo of todosList">
     <app-todo
