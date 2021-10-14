@@ -1,6 +1,11 @@
 import { Injectable } from "@angular/core";
-import { Observable, of } from "rxjs";
+import { Observable, of, from } from "rxjs";
 import { Todo } from "../models/todo";
+
+enum StatusType {
+  Completed = "Completed",
+  InProgress = "In Progress",
+}
 @Injectable({
   providedIn: "root",
 })
@@ -9,14 +14,14 @@ export class TodoService {
     {
       title: "Learn Angular",
       body: "Angular is great for frontend development",
-      status: "In Progress",
+      status: StatusType.InProgress,
       createdOn: new Date().toDateString(),
       uid: "jasdjas",
     },
     {
       title: "Learn React",
       body: "React is great for frontend development",
-      status: "Completed",
+      status: StatusType.Completed,
       createdOn: new Date().toDateString(),
       uid: "jasdjas",
     },
@@ -34,8 +39,8 @@ export class TodoService {
   // Changes after deletion are not reflecting on UI
   // Todo: Need improvement
   removeTodo = (todoTitle: string): void => {
-    // this.todos = this.tdos?.filter((todoObj) => todoObj.title !== todoTitle);
-    console.log(this.todos);
+    this.todos = this.todos?.filter((todoObj) => todoObj.title !== todoTitle);
+    console.log("service comp", this.todos);
   };
 
   //Function to toggle status of todo
@@ -43,8 +48,11 @@ export class TodoService {
     this.todos?.map((todoObj) => {
       if (todoObj.title === todoTitle) {
         todoObj.status =
-          todoObj.status === "In Progress" ? "Completed" : "In Progress";
+          todoObj.status === StatusType.InProgress
+            ? StatusType.Completed
+            : StatusType.InProgress;
       }
     });
+    console.log("service comp", this.todos);
   };
 }

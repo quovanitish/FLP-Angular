@@ -20,18 +20,23 @@ export class TodosComponent implements OnInit {
   constructor(private _todoService: TodoService) {}
 
   ngOnInit() {
-    this._todoService
-      .fetchTodos()
-      .subscribe((todos) => (this.todosList = todos));
+    this._todoService.fetchTodos().subscribe((todos) => {
+      this.todosList = todos;
+    });
   }
 
   // Event handler to handle status toggle
   handleToggleStatus = (todoTitle: string) => {
+    console.log("inside comp", this.todosList);
     this._todoService.toggleStatus(todoTitle);
   };
 
   // Event handler to handle deleting todo
   handleDeleteTodo = (todoTitle: string) => {
-    this._todoService.removeTodo(todoTitle);
+    console.log("inside comp", this.todosList);
+      this._todoService.removeTodo(todoTitle);
+    //   this._todoService
+    //     .fetchTodos()
+    //     .subscribe((todos) => (this.todosList = todos));
   };
 }
