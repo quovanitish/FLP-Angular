@@ -55,4 +55,9 @@ export class TodoService {
     });
     console.log("service comp", this.todos);
   };
+
+  // Function to add new todo to the list
+  addTodo = (newTodo: Todo): void => {
+    this.todos.push(newTodo);
+  };
 }

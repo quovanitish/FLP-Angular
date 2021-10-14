@@ -9,12 +9,11 @@ import { Todo } from "src/models/todo";
 })
 export class TodosComponent implements OnInit {
   todosList?: Todo[];
-  inputValue?: String;
+  inputValue?: string;
 
   // get value from input
   getValue = (e: Event) => {
     this.inputValue = (e.target as HTMLSpanElement).textContent!;
-    console.log(this.inputValue);
   };
 
   constructor(private _todoService: TodoService) {}
@@ -34,9 +33,23 @@ export class TodosComponent implements OnInit {
   // Event handler to handle deleting todo
   handleDeleteTodo = (todoTitle: string) => {
     console.log("inside comp", this.todosList);
-      this._todoService.removeTodo(todoTitle);
+    this._todoService.removeTodo(todoTitle);
     //   this._todoService
     //     .fetchTodos()
     //     .subscribe((todos) => (this.todosList = todos));
+  };
+
+  // add todo to the list
+  addTodo = (todoTitle: string) => {
+    let todoObj: Todo = {
+      title: todoTitle,
+      body: '',
+      status: "In Progress",
+      createdOn: new Date().toDateString(),
+      uid: "ahsbvdhaks",
+    };
+
+    console.log(todoObj);
+    this._todoService.addTodo(todoObj);
   };
 }
