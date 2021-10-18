@@ -11,45 +11,41 @@ export class TodosComponent implements OnInit {
   todosList?: Todo[];
   inputValue?: string;
 
+  constructor(private _todoService: TodoService) {}
+
+  ngOnInit() {
+    let todos = this._todoService.fetchTodos();
+    this.todosList = todos;
+  }
+
   // get value from input
   getValue = (e: Event) => {
     this.inputValue = (e.target as HTMLSpanElement).textContent!;
   };
 
-  constructor(private _todoService: TodoService) {}
-
-  ngOnInit() {
-    this._todoService.fetchTodos().subscribe((todos) => {
-      this.todosList = todos;
-    });
-  }
-
   // Event handler to handle status toggle
   handleToggleStatus = (todoTitle: string) => {
-    console.log("inside comp", this.todosList);
     this._todoService.toggleStatus(todoTitle);
   };
 
   // Event handler to handle deleting todo
   handleDeleteTodo = (todoTitle: string) => {
-    console.log("inside comp", this.todosList);
-    this._todoService.removeTodo(todoTitle);
-    //   this._todoService
-    //     .fetchTodos()
-    //     .subscribe((todos) => (this.todosList = todos));
+    const isAllowed = confirm("Are you sure?");
+    if (isAllowed) {
+      this._todoService.removeTodo(todoTitle);
+    }
   };
 
   // add todo to the list
   addTodo = (todoTitle: string) => {
-    let todoObj: Todo = {
-      title: todoTitle,
-      body: '',
-      status: "In Progress",
-      createdOn: new Date().toDateString(),
-      uid: "ahsbvdhaks",
-    };
+    const todoObj = new Todo(
+      todoTitle,
+      "",
+      "In Progress",
+      new Date().toDateString(),
+      "asdasdsadas"
+    );
 
-    console.log(todoObj);
     this._todoService.addTodo(todoObj);
   };
 }

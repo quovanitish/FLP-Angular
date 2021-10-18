@@ -1,4 +1,5 @@
 import { Component, Input, Output, EventEmitter, OnInit } from "@angular/core";
+import { Todo } from "src/models/todo";
 @Component({
   selector: "app-todo",
   templateUrl: "./todo.component.html",
@@ -6,13 +7,7 @@ import { Component, Input, Output, EventEmitter, OnInit } from "@angular/core";
 })
 export class TodoComponent implements OnInit {
   @Input()
-  todoObj?: {
-    title: string;
-    body: string;
-    status: string;
-    createdOn: string;
-    uid: string;
-  };
+  todoObj?: Todo;
 
   @Output()
   toggleStatus = new EventEmitter<string>();

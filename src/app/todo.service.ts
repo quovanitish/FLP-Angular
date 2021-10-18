@@ -1,11 +1,6 @@
 import { Injectable } from "@angular/core";
-import { Observable, of, from } from "rxjs";
 import { Todo } from "../models/todo";
-
-enum StatusType {
-  Completed = "Completed",
-  InProgress = "In Progress",
-}
+import { StatusType } from "../models/todoStatus";
 @Injectable({
   providedIn: "root",
 })
@@ -30,17 +25,16 @@ export class TodoService {
   constructor() {}
 
   // fetch todo list through service
-  fetchTodos = (): Observable<Todo[]> => {
-    // return this.todos;
-    return of(this.todos);
+  fetchTodos = (): Todo[] => {
+    return this.todos;
   };
 
   // Function to remove a todo from the todo list
-  // Changes after deletion are not reflecting on UI
-  // Todo: Need improvement
   removeTodo = (todoTitle: string): void => {
-    this.todos = this.todos?.filter((todoObj) => todoObj.title !== todoTitle);
-    console.log("service comp", this.todos);
+    const filteredTodos = this.todos?.filter(
+      (todoObj) => todoObj.title !== todoTitle
+    );
+    this.todos = [...filteredTodos];
   };
 
   //Function to toggle status of todo
@@ -53,7 +47,6 @@ export class TodoService {
             : StatusType.InProgress;
       }
     });
-    console.log("service comp", this.todos);
   };
 
   // Function to add new todo to the list
