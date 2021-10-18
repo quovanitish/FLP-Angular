@@ -7,11 +7,24 @@
       (keyup)="getValue($event)"
     ></span>
   </div>
-  <div class="todos flex" *ngFor="let todo of todosList">
-    <app-todo
-      [todoObj]="todo"
-      (toggleStatus)="handleToggleStatus($event)"
-      (deleteTodo)="handleDeleteTodo($event)"
-    ></app-todo>
+  <div class="flex">
+    <div>
+      <div class="todos flex-col" *ngFor="let todo of todosList">
+        <app-todo
+          [todoObj]="todo"
+          (toggleStatus)="handleToggleStatus($event)"
+          (deleteTodo)="handleDeleteTodo($event)"
+        ></app-todo>
+      </div>
+    </div>
+    <div>
+      <div class="todos flex-col" *ngFor="let todo of todosList">
+        <app-todo
+          [todoObj]="todo"
+          (toggleStatus)="handleToggleStatus($event)"
+          (deleteTodo)="handleDeleteTodo($event)"
+        ></app-todo>
+      </div>
+    </div>
   </div>
 </div>
