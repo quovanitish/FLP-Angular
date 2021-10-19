@@ -8,12 +8,15 @@ import { Todo } from "src/models/todo";
 export class TodoComponent implements OnInit {
   @Input()
   todoObj?: Todo;
-
+  
   @Output()
   toggleStatus = new EventEmitter<string>();
 
   @Output()
   deleteTodo = new EventEmitter<string>();
+
+  @Output()
+  updateTodo = new EventEmitter<{ todoTitle: string; todoBody: string }>();
 
   constructor() {}
 
@@ -27,5 +30,9 @@ export class TodoComponent implements OnInit {
   // Emit event to parent to handle deleting todo
   handleDeleteTodo = (todoTitle: string) => {
     this.deleteTodo.emit(todoTitle);
+  };
+
+  handleUpdateTodo = (todoTitle: string, todoBody: string) => {
+    this.updateTodo.emit({ todoTitle, todoBody });
   };
 }

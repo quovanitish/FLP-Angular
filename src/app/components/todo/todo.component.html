@@ -1,8 +1,8 @@
 <div class="todo" *ngIf="todoObj">
-  <h3 class="flex todo-header" contenteditable="true">
+  <h3 class="flex todo-header">
     {{ todoObj.title }}
   </h3>
-  <div class="todo-body" contenteditable="true">
+  <div class="todo-body" contenteditable="true" #todoBody>
     {{ todoObj.body }}
   </div>
   <div class="todo-info">
@@ -25,7 +25,15 @@
       {{ todoObj.createdOn }}
     </small>
   </div>
-  <div class="todo-action">
-    <button (click)="handleDeleteTodo(todoObj.title)">Remove</button>
+  <div>
+    <div class="todo-action">
+      <button (click)="handleDeleteTodo(todoObj.title)">Remove</button>
+      <button
+        class="green"
+        (click)="handleUpdateTodo(todoObj.title, todoBody.textContent!)"
+      >
+        Update Todo
+      </button>
+    </div>
   </div>
 </div>

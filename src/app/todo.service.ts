@@ -46,6 +46,18 @@ export class TodoService {
     return localStorageItem == null ? [] : localStorageItem.todos;
   };
 
+  // make updates to todo body
+  updateTodo = (todoTitle: string, todoBody: string): void => {
+    let localStorageTodos = this.getTodos();
+    localStorageTodos.map((todoObj) => {
+      if (todoObj.title === todoTitle) {
+        todoObj.body = todoBody;
+      }
+    });
+
+    this.setTodos(localStorageTodos);
+  };
+
   // set new todo list to localstorage
   private setTodos = (todos: Todo[]): void => {
     localStorage.setItem("todos", JSON.stringify({ todos: todos }));

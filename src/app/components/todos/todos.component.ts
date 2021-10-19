@@ -7,7 +7,6 @@ import { Todo } from "src/models/todo";
   templateUrl: "./todos.component.html",
   styleUrls: ["./todos.component.scss"],
 })
-
 export class TodosComponent implements OnInit {
   inputValue?: string;
 
@@ -44,5 +43,11 @@ export class TodosComponent implements OnInit {
     );
 
     this._todoService.addTodo(todoObj);
+    this.inputValue = "";
+  };
+
+  // handle update todo click
+  handleUpdateTodo = (updateObj: any) => {
+    this._todoService.updateTodo(updateObj.todoTitle, updateObj.todoBody);
   };
 }
