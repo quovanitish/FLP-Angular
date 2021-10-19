@@ -5,41 +5,22 @@ import { StatusType } from "../models/todoStatus";
   providedIn: "root",
 })
 export class TodoService {
-  private todos: Todo[] = [
-    {
-      title: "Learn Angular",
-      body: "Angular is great for frontend development",
-      status: StatusType.InProgress,
-      createdOn: new Date().toDateString(),
-      uid: "jasdjas",
-    },
-    {
-      title: "Learn React",
-      body: "React is great for frontend development",
-      status: StatusType.Completed,
-      createdOn: new Date().toDateString(),
-      uid: "jasdjas",
-    },
-  ];
-
   constructor() {}
-
-  // fetch todo list through service
-  fetchTodos = (): Todo[] => {
-    return this.todos;
-  };
 
   // Function to remove a todo from the todo list
   removeTodo = (todoTitle: string): void => {
-    const filteredTodos = this.todos?.filter(
+    let localStorageTodos = this.getTodos();
+    localStorageTodos = localStorageTodos.filter(
       (todoObj) => todoObj.title !== todoTitle
     );
-    this.todos = [...filteredTodos];
+
+    this.setTodos(localStorageTodos);
   };
 
   //Function to toggle status of todo
   toggleStatus = (todoTitle: string): void => {
-    this.todos?.map((todoObj) => {
+    let localStorageTodos = this.getTodos();
+    localStorageTodos.map((todoObj) => {
       if (todoObj.title === todoTitle) {
         todoObj.status =
           todoObj.status === StatusType.InProgress
@@ -47,10 +28,26 @@ export class TodoService {
             : StatusType.InProgress;
       }
     });
+
+    this.setTodos(localStorageTodos);
   };
 
   // Function to add new todo to the list
   addTodo = (newTodo: Todo): void => {
-    this.todos.push(newTodo);
+    let localStorageTodos = this.getTodos();
+    localStorageTodos.push(newTodo);
+    this.setTodos(localStorageTodos);
+  };
+
+  /*Local Storage functions*/
+  // get todo from localstorage
+  getTodos = (): Todo[] => {
+    let localStorageItem = JSON.parse(localStorage.getItem("todos")!);
+    return localStorageItem == null ? [] : localStorageItem.todos;
+  };
+
+  // set new todo list to localstorage
+  private setTodos = (todos: Todo[]): void => {
+    localStorage.setItem("todos", JSON.stringify({ todos: todos }));
   };
 }
