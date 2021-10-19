@@ -7,16 +7,13 @@ import { Todo } from "src/models/todo";
   templateUrl: "./todos.component.html",
   styleUrls: ["./todos.component.scss"],
 })
+
 export class TodosComponent implements OnInit {
-  todosList?: Todo[];
   inputValue?: string;
 
-  constructor(private _todoService: TodoService) {}
+  constructor(public _todoService: TodoService) {}
 
-  ngOnInit() {
-    let todos = this._todoService.fetchTodos();
-    this.todosList = todos;
-  }
+  ngOnInit() {}
 
   // get value from input
   getValue = (e: Event) => {
@@ -29,7 +26,7 @@ export class TodosComponent implements OnInit {
   };
 
   // Event handler to handle deleting todo
-  handleDeleteTodo = (todoTitle: string) => {
+  handleDeleteTodo = (todoTitle: string): void => {
     const isAllowed = confirm("Are you sure?");
     if (isAllowed) {
       this._todoService.removeTodo(todoTitle);

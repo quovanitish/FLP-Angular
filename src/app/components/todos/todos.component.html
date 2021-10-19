@@ -9,7 +9,10 @@
   </div>
   <div class="flex">
     <div>
-      <div class="todos flex-col" *ngFor="let todo of todosList">
+      <div
+        class="todos flex-col"
+        *ngFor="let todo of this._todoService.getTodos()"
+      >
         <app-todo
           [todoObj]="todo"
           (toggleStatus)="handleToggleStatus($event)"
@@ -17,14 +20,17 @@
         ></app-todo>
       </div>
     </div>
-    <div>
-      <div class="todos flex-col" *ngFor="let todo of todosList">
+    <!-- <div>
+      <div
+        class="todos flex-col"
+        *ngFor="let todo of this._todoService.getTodos()"
+      >
         <app-todo
           [todoObj]="todo"
           (toggleStatus)="handleToggleStatus($event)"
           (deleteTodo)="handleDeleteTodo($event)"
         ></app-todo>
       </div>
-    </div>
+    </div> -->
   </div>
 </div>
