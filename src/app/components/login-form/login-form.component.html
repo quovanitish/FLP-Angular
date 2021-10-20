@@ -1,18 +1,45 @@
 <div class="d-flex justify-content-center align-items-center mt-5">
-  <form class="col-lg-3">
+  <form
+    class="col-lg-3"
+    #loginForm="ngForm"
+    (ngSubmit)="onSubmit(loginForm.value)"
+  >
     <div class="mb-3">
-      <label for="exampleInputEmail1" class="form-label">Email address</label>
+      <label>Email address</label>
       <input
         type="email"
         class="form-control"
-        id="exampleInputEmail1"
-        aria-describedby="emailHelp"
+        placeholder="Enter email"
+        name="userEmail"
+        [(ngModel)]="user.email"
+        #email="ngModel"
+        required
       />
+      <div [hidden]="email.valid || email.pristine" class="alert alert-danger">
+        Name is required
+      </div>
     </div>
     <div class="mb-3">
-      <label for="exampleInputPassword1" class="form-label">Password</label>
-      <input type="password" class="form-control" id="exampleInputPassword1" />
+      <label>Password</label>
+      <input
+        type="password"
+        class="form-control"
+        placeholder="Enter password"
+        name="userPassword"
+        [(ngModel)]="user.password"
+        #password="ngModel"
+        required
+      />
+      <div [hidden]="email.valid || email.pristine" class="alert alert-danger">
+        Password is required
+      </div>
     </div>
-    <button type="submit" class="btn btn-primary">Login</button>
+    <button
+      type="submit"
+      class="w-100 btn btn-primary"
+      [disabled]="!loginForm.form.valid"
+    >
+      Login
+    </button>
   </form>
 </div>
