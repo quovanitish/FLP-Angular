@@ -7,7 +7,7 @@ import { TodosComponent } from "./components/todos/todos.component";
 const routes: Routes = [
   { path: "login", component: LoginFormComponent },
   { path: "todos", canActivate: [AuthGuard], component: TodosComponent },
-  { path: "", redirectTo: "LoginFormComponent", pathMatch: "full" },
+  { path: "**", component: LoginFormComponent },
 ];
 
 @NgModule({
