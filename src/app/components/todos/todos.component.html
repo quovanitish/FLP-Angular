@@ -1,37 +1,39 @@
-<div class="todo-container bg-primary">
-  <div class="add-todo">
-    <button class="add-todo-action" (click)="addTodo(inputValue!)">+</button>
-    <span
-      class="add-todo-input"
-      contenteditable="true"
-      (keyup)="getValue($event)"
-    ></span>
-  </div>
-  <div class="flex">
-    <div>
-      <div
-        class="todos flex-col"
-        *ngFor="let todo of this._todoService.getTodos()"
-      >
-        <app-todo
-          [todoObj]="todo"
-          (toggleStatus)="handleToggleStatus($event)"
-          (deleteTodo)="handleDeleteTodo($event)"
-          (updateTodo)="handleUpdateTodo($event)"
-        ></app-todo>
-      </div>
+<div class="flex">
+  <div class="todos todo-container bg-primary">
+    <div class="add-todo">
+      <button class="add-todo-action" (click)="addTodo(inputValue!)">+</button>
+      <span
+        class="add-todo-input"
+        contenteditable="true"
+        (keyup)="getValue($event)"
+      ></span>
     </div>
-    <!-- <div>
-      <div
-        class="todos flex-col"
-        *ngFor="let todo of this._todoService.getTodos()"
-      >
-        <app-todo
-          [todoObj]="todo"
-          (toggleStatus)="handleToggleStatus($event)"
-          (deleteTodo)="handleDeleteTodo($event)"
-        ></app-todo>
+    <div class="flex">
+      <div>
+        <div
+          class="todos flex-col"
+          *ngFor="let todo of this._todoService.getTodos()"
+        >
+          <app-todo
+            [todoObj]="todo"
+            (toggleStatus)="handleToggleStatus($event)"
+            (deleteTodo)="handleDeleteTodo($event)"
+            (updateTodo)="handleUpdateTodo($event)"
+          ></app-todo>
+        </div>
       </div>
-    </div> -->
+      <!-- <div>
+      <div
+      class="todos flex-col"
+      *ngFor="let todo of this._todoService.getTodos()"
+      >
+      <app-todo
+      [todoObj]="todo"
+      (toggleStatus)="handleToggleStatus($event)"
+      (deleteTodo)="handleDeleteTodo($event)"
+      ></app-todo>
+    </div>
+  </div> -->
+    </div>
   </div>
 </div>
