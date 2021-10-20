@@ -1,6 +1,7 @@
 import { Injectable } from "@angular/core";
 import { Todo } from "../models/todo";
 import { StatusType } from "../models/todoStatus";
+import { of, Observable } from "rxjs";
 @Injectable({
   providedIn: "root",
 })
@@ -61,5 +62,11 @@ export class TodoService {
   // set new todo list to localstorage
   private setTodos = (todos: Todo[]): void => {
     localStorage.setItem("todos", JSON.stringify({ todos: todos }));
+  };
+
+  // Todos array observable to subscribe listen changes
+  search = (): Observable<Todo[]> => {
+    const todos = this.getTodos();
+    return of(todos);
   };
 }
