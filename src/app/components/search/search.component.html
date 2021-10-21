@@ -9,6 +9,7 @@
           placeholder="Search"
           aria-label="Search"
           aria-describedby="search-addon"
+          autofocus
         />
       </div>
       <div class="p-2">
@@ -17,4 +18,15 @@
     </div>
   </nav>
   <hr />
+  <div class="flex">
+    <div *ngFor="let todo of queryResults">
+      <app-todo
+        [todoObj]="todo"
+        (toggleStatus)="handleToggleStatus($event)"
+        (deleteTodo)="handleDeleteTodo($event)"
+        (updateTodo)="handleUpdateTodo($event)"
+        *ngIf="queryField.value !== ''"
+      ></app-todo>
+    </div>
+  </div>
 </header>

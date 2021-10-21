@@ -13,19 +13,37 @@ export class SearchComponent implements OnInit {
   constructor(private todoService: TodoService) {}
 
   queryField: FormControl = new FormControl();
+  queryResults?: Todo[] = [];
 
   // Subscribe to change in input and search input value for available todos
   ngOnInit(): void {
     this.queryField.valueChanges
       .pipe(debounceTime(200), distinctUntilChanged())
       .subscribe((val) =>
-        this.todoService.search( ).subscribe((todoArray) => {
-          todoArray.map((todoObj: Todo) => {
+        this.todoService.search().subscribe((todoArray) => {
+          const resultsArray = todoArray.map((todoObj: Todo) => {
             if (todoObj.title.toLowerCase().includes(val) && val !== "") {
-              console.log(todoObj);
+              return todoObj;
             }
+            return new Todo("", "", "", "", "");
           });
+          this.queryResults = [...resultsArray];
         })
       );
   }
+
+  handleToggleStatus = (todoTitle: string) => {
+    this.todoService.toggleStatus(todoTitle);
+  };
+
+  handleDeleteTodo = (todoTitle: string) => {
+    const isAllowed = confirm("Are you sure?");
+    if (isAllowed) {
+      this.todoService.removeTodo(todoTitle);
+    }
+  };
+
+  handleUpdateTodo = (updateObj: any) => {
+    this.todoService.updateTodo(updateObj.todoTitle, updateObj.todoBody);
+  };
 }

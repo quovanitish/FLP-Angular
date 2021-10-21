@@ -1,7 +1,7 @@
 import { Injectable } from "@angular/core";
 import { Todo } from "../models/todo";
 import { StatusType } from "../models/todoStatus";
-import { of, Observable } from "rxjs";
+import { from, of, Observable } from "rxjs";
 @Injectable({
   providedIn: "root",
 })
