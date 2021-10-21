@@ -1,8 +1,10 @@
 import { Component, OnInit } from "@angular/core";
+import { Router } from "@angular/router";
 import { FormControl } from "@angular/forms";
 import { debounceTime, distinctUntilChanged } from "rxjs/operators";
 import { TodoService } from "src/app/todo.service";
 import { Todo } from "../../../models/todo";
+import { EndPoints } from "../../../Readonly/urlConstants";
 
 @Component({
   selector: "app-search",
@@ -10,10 +12,11 @@ import { Todo } from "../../../models/todo";
   styleUrls: ["./search.component.scss"],
 })
 export class SearchComponent implements OnInit {
-  constructor(private todoService: TodoService) {}
+  constructor(private todoService: TodoService, private router: Router) {}
 
   queryField: FormControl = new FormControl();
   queryResults?: Todo[] = [];
+  endPoints: EndPoints = { login: "/login", todos: "/todos" };
 
   // Subscribe to change in input and search input value for available todos
   ngOnInit(): void {
@@ -45,5 +48,10 @@ export class SearchComponent implements OnInit {
 
   handleUpdateTodo = (updateObj: any) => {
     this.todoService.updateTodo(updateObj.todoTitle, updateObj.todoBody);
+  };
+
+  handleLogOut = () => {
+    localStorage.setItem("isLoggedIn", JSON.stringify({ loggedIn: false }));
+    this.router.navigate([this.endPoints.login]);
   };
 }
