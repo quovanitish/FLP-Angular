@@ -22,18 +22,22 @@ export class SearchComponent implements OnInit {
   ngOnInit(): void {
     this.queryField.valueChanges
       .pipe(debounceTime(200), distinctUntilChanged())
-      .subscribe((val) =>
-        this.todoService.search().subscribe((todoArray) => {
-          const resultsArray = todoArray.map((todoObj: Todo) => {
-            if (todoObj.title.toLowerCase().includes(val) && val !== "") {
-              return todoObj;
-            }
-            return new Todo("", "", "", "", "");
-          });
-          this.queryResults = [...resultsArray];
-        })
-      );
+      .subscribe((val) => {
+        this.searchFilter(val);
+      });
   }
+
+  searchFilter = (query: string) => {
+    this.todoService.search().subscribe((todosArray) => {
+      const resultsArray = todosArray.filter((todoObj: Todo) => {
+        if (todoObj.title.toLowerCase().includes(query) && query !== "") {
+          return true;
+        }
+        return false;
+      });
+      this.queryResults = [...resultsArray];
+    });
+  };
 
   handleToggleStatus = (todoTitle: string) => {
     this.todoService.toggleStatus(todoTitle);
