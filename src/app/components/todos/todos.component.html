@@ -13,7 +13,7 @@
       <div>
         <div
           class="todos flex-col"
-          *ngFor="let todo of this._todoService.getTodos()"
+          *ngFor="let todo of todos"
         >
           <app-todo
             [todoObj]="todo"
@@ -23,18 +23,6 @@
           ></app-todo>
         </div>
       </div>
-      <!-- <div>
-      <div
-      class="todos flex-col"
-      *ngFor="let todo of this._todoService.getTodos()"
-      >
-      <app-todo
-      [todoObj]="todo"
-      (toggleStatus)="handleToggleStatus($event)"
-      (deleteTodo)="handleDeleteTodo($event)"
-      ></app-todo>
-    </div>
-  </div> -->
     </div>
   </div>
 </div>

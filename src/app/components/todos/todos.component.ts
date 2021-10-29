@@ -9,10 +9,15 @@ import { Todo } from "src/models/todo";
 })
 export class TodosComponent implements OnInit {
   inputValue?: string;
+  todos?: Todo[];
 
   constructor(public _todoService: TodoService) {}
 
-  ngOnInit() {}
+  ngOnInit() {
+    this._todoService.broadcastTodos.subscribe(
+      (updatedTodos) => (this.todos = [...updatedTodos])
+    );
+  }
 
   // get value from input
   getValue = (e: Event) => {

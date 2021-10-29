@@ -28,7 +28,7 @@ export class SearchComponent implements OnInit {
   }
 
   searchFilter = (query: string) => {
-    this.todoService.search().subscribe((todosArray) => {
+    this.todoService.broadcastTodos.subscribe((todosArray) => {
       const resultsArray = todosArray.filter((todoObj: Todo) => {
         if (todoObj.title.toLowerCase().includes(query) && query !== "") {
           return true;

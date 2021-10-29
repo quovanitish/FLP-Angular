@@ -1,27 +1,30 @@
 import { Injectable } from "@angular/core";
 import { Todo } from "../models/todo";
 import { StatusType } from "../models/todoStatus";
-import { from, of, Observable } from "rxjs";
+import { BehaviorSubject } from "rxjs";
 @Injectable({
   providedIn: "root",
 })
 export class TodoService {
-  constructor() {}
+  private todos = new BehaviorSubject<Todo[]>([]);
+  broadcastTodos = this.todos.asObservable();
+  constructor() {
+    this.todos.next(this.getTodos());
+  }
 
   // Function to remove a todo from the todo list
   removeTodo = (todoTitle: string): void => {
-    let localStorageTodos = this.getTodos();
-    localStorageTodos = localStorageTodos.filter(
+    const filteredTodos = this.todos.value.filter(
       (todoObj) => todoObj.title !== todoTitle
     );
-
-    this.setTodos(localStorageTodos);
+    this.todos.next(filteredTodos);
+    this.setTodos(filteredTodos);
   };
 
   //Function to toggle status of todo
   toggleStatus = (todoTitle: string): void => {
-    let localStorageTodos = this.getTodos();
-    localStorageTodos.map((todoObj) => {
+    const todoList = this.todos.getValue();
+    todoList.map((todoObj) => {
       if (todoObj.title === todoTitle) {
         todoObj.status =
           todoObj.status === StatusType.InProgress
@@ -29,15 +32,28 @@ export class TodoService {
             : StatusType.InProgress;
       }
     });
-
-    this.setTodos(localStorageTodos);
+    this.todos.next(todoList);
+    this.setTodos(todoList);
   };
 
   // Function to add new todo to the list
   addTodo = (newTodo: Todo): void => {
-    let localStorageTodos = this.getTodos();
-    localStorageTodos.push(newTodo);
-    this.setTodos(localStorageTodos);
+    let todoList = this.todos.getValue();
+    todoList.push(newTodo);
+    this.todos.next(todoList);
+    this.setTodos(todoList);
+  };
+
+  // make updates to todo body
+  updateTodo = (todoTitle: string, todoBody: string): void => {
+    let todoList = this.todos.getValue();
+    todoList.map((todoObj) => {
+      if (todoObj.title === todoTitle) {
+        todoObj.body = todoBody;
+      }
+    });
+    this.todos.next(todoList);
+    this.setTodos(todoList);
   };
 
   /*Local Storage functions*/
@@ -47,26 +63,8 @@ export class TodoService {
     return localStorageItem == null ? [] : localStorageItem.todos;
   };
 
-  // make updates to todo body
-  updateTodo = (todoTitle: string, todoBody: string): void => {
-    let localStorageTodos = this.getTodos();
-    localStorageTodos.map((todoObj) => {
-      if (todoObj.title === todoTitle) {
-        todoObj.body = todoBody;
-      }
-    });
-
-    this.setTodos(localStorageTodos);
-  };
-
   // set new todo list to localstorage
   private setTodos = (todos: Todo[]): void => {
     localStorage.setItem("todos", JSON.stringify({ todos: todos }));
-  };
-
-  // Todos array observable to subscribe listen changes
-  search = (): Observable<Todo[]> => {
-    const todos = this.getTodos();
-    return of(todos);
   };
 }
