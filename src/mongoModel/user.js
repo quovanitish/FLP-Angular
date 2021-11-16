@@ -34,6 +34,21 @@ const userSchema = new mongoose.Schema({
   },
 });
 
+// schema method to get user using email and password
+userSchema.statics.findByCredentials = async (email, password) => {
+  const user = await User.findOne({ email });
+  if (!user) {
+    throw new Error("Unable to login");
+  }
+
+  const isMatch = await bcrypt.compare(password, user.password);
+  if (!isMatch) {
+    throw new Error("Invalid credentials");
+  }
+
+  return user;
+};
+
 // hash plain text passwords before save
 userSchema.pre("save", async function (next) {
   const user = this;
