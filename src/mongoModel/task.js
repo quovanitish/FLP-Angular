@@ -14,11 +14,11 @@ const taskSchema = new mongoose.Schema({
   status: {
     type: String,
     default: "In progress",
-    required: true,
   },
 
   createdOn: {
     type: Date,
+    default: Date.now(),
   },
 });
 
