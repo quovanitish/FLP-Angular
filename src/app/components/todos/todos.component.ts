@@ -1,7 +1,6 @@
 import { Component, OnInit } from "@angular/core";
 import { TodoService } from "../../services/todo/todo.service";
 import { Todo } from "src/models/todo";
-import { AuthService } from "src/app/services/auth/auth.service";
 
 @Component({
   selector: "app-todos",
@@ -12,21 +11,9 @@ export class TodosComponent implements OnInit {
   inputValue?: string;
   todos?: Todo[];
 
-  constructor(
-    public _todoService: TodoService,
-    private authService: AuthService
-  ) {}
+  constructor(public _todoService: TodoService) {}
 
   ngOnInit() {
-    this.authService.getTodos().subscribe(
-      (res: any) => {
-        console.log(res);
-      },
-      (err: any) => {
-        console.log(err);
-      }
-    );
-    
     this._todoService.broadcastTodos.subscribe(
       (updatedTodos) => (this.todos = [...updatedTodos])
     );
@@ -57,7 +44,8 @@ export class TodosComponent implements OnInit {
       "",
       "In Progress",
       new Date().toDateString(),
-      "asdasdsadas"
+      "asdasdsadas",
+      ""
     );
 
     this._todoService.addTodo(todoObj);
