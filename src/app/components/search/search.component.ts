@@ -2,7 +2,7 @@ import { Component, OnInit } from "@angular/core";
 import { Router } from "@angular/router";
 import { FormControl } from "@angular/forms";
 import { debounceTime, distinctUntilChanged } from "rxjs/operators";
-import { TodoService } from "src/app/todo.service";
+import { TodoService } from "../../services/todo/todo.service";
 import { Todo } from "../../../models/todo";
 import { EndPoints } from "../../../Readonly/urlConstants";
 

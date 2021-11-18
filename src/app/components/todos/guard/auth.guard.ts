@@ -7,13 +7,13 @@ import {
   UrlTree,
 } from "@angular/router";
 import { Observable } from "rxjs";
+import { AuthService } from "src/app/services/auth/auth.service";
 import { EndPoints } from "../../../../Readonly/urlConstants";
-
 @Injectable({
   providedIn: "root",
 })
 export class AuthGuard implements CanActivate {
-  constructor(private router: Router) {}
+  constructor(private router: Router, private authService: AuthService) {}
   endPoints: EndPoints = { login: "/login", todos: "/todos" };
 
   canActivate(
@@ -24,15 +24,12 @@ export class AuthGuard implements CanActivate {
     | Promise<boolean | UrlTree>
     | boolean
     | UrlTree {
-    let userLoggedInItem = JSON.parse(localStorage.getItem("isLoggedIn")!);
-
-    if (userLoggedInItem === null) {
+      
+    if (this.authService.isLoggedIn()) {
+      return true;
+    } else {
       this.router.navigate([this.endPoints.login]);
       return false;
-    } else {
-      return userLoggedInItem.loggedIn === false
-        ? this.router.navigate([this.endPoints.login])
-        : true;
     }
   }
 }
