@@ -5,6 +5,7 @@ import { debounceTime, distinctUntilChanged } from "rxjs/operators";
 import { TodoService } from "../../services/todo/todo.service";
 import { Todo } from "../../../models/todo";
 import { EndPoints } from "../../../Readonly/urlConstants";
+import { AuthService } from "src/app/services/auth/auth.service";
 
 @Component({
   selector: "app-search",
@@ -12,7 +13,11 @@ import { EndPoints } from "../../../Readonly/urlConstants";
   styleUrls: ["./search.component.scss"],
 })
 export class SearchComponent implements OnInit {
-  constructor(private todoService: TodoService, private router: Router) {}
+  constructor(
+    private todoService: TodoService,
+    private router: Router,
+    private authService: AuthService
+  ) {}
 
   queryField: FormControl = new FormControl();
   queryResults?: Todo[] = [];
@@ -55,7 +60,15 @@ export class SearchComponent implements OnInit {
   };
 
   handleLogOut = () => {
-    localStorage.setItem("isLoggedIn", JSON.stringify({ loggedIn: false }));
-    this.router.navigate([this.endPoints.login]);
+    this.authService.logout().subscribe(
+      () => {
+        console.log("Logout success");
+        localStorage.removeItem("token");
+        this.router.navigate([this.endPoints.login]);
+      },
+      (err) => {
+        console.log(err);
+      }
+    );
   };
 }

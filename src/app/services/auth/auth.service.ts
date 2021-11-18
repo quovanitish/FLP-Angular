@@ -21,7 +21,7 @@ export class AuthService {
     return this.http.post(`${apiEndpoint}users/login`, data);
   }
 
-  getTodos(): any {
-    return this.http.get(`${apiEndpoint}tasks`);
+  logout(): Observable<any> {
+    return this.http.post(`${apiEndpoint}users/logout`, {});
   }
 }
